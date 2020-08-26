@@ -44,6 +44,7 @@
 		19CE7EA824F658960029DD97 /* URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		19CE7EAB24F6589F0029DD97 /* PageIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIdentifier.swift; sourceTree = "<group>"; };
 		19CE7EAC24F6589F0029DD97 /* SectionIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionIdentifier.swift; sourceTree = "<group>"; };
+		19CE7EB124F6A9FA0029DD97 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		19D5D24024EED4C2001D0BEC /* ios14testApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios14testApp.swift; sourceTree = "<group>"; };
 		19D5D24124EED4C2001D0BEC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		19D5D24224EED4C3001D0BEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -95,6 +96,7 @@
 		19D5D23A24EED4C2001D0BEC = {
 			isa = PBXGroup;
 			children = (
+				19CE7EB124F6A9FA0029DD97 /* README.md */,
 				19D5D23F24EED4C2001D0BEC /* Shared */,
 				19D5D24924EED4C3001D0BEC /* iOS */,
 				19D5D25024EED4C3001D0BEC /* macOS */,
