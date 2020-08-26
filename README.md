@@ -13,5 +13,7 @@ It uses 3 test deeplinks:
 
 currently only first two cases are working (most of the times), and last one does not work at all
 
-Feedback to Apple will be send and this repository will be updated with new results.
+Feedback to Apple describing this issue: FB8542861
+
+If you also encounter this issue please refer to this feedback.
 
