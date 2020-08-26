@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct ios14testApp: App {
+    @State var selectedSection: SectionIdentifier? = .speakers
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(selectedSection: $selectedSection)
         }
     }
 }
