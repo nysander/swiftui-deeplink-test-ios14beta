@@ -44,28 +44,44 @@ struct ItemListView: View {
     @State var activeUUID: UUID?
     var body: some View {
         NavigationView {
-            List {//}(selection: $activeUUID) {
-                Button(action: {
-//                    selectedSection = .speakers
-                }) {
-                    Text("speakers")
-                }
-                ForEach(model.items) { item in
-                    NavigationLink(destination: DetailView(item: item), tag: item.id, selection: $activeUUID) {
-                        Text("\(item.name) \(item.id)").font(.caption)
-
-//                    .id(item.id)
-
+            ScrollViewReader { scrollProxy in
+                List {//}(selection: $activeUUID) {
+                    Button(action: {
+                        //                    selectedSection = .speakers
+                    }) {
+                        Text("speakers")
                     }
-                    .onAppear {
-//                        print(item.id.uuidString)
+                    ForEach(model.items) { item in
+                        NavigationLink(destination: DetailView(item: item), tag: item.id, selection: $activeUUID) {
+                            Text("\(item.name) \(item.id)").font(.caption)
+                            
+                            //                    .id(item.id)
+                            
+                        }
+                        .id(item.id)
+                        .onAppear {
+                            //                        print(item.id.uuidString)
+                        }
+                    }
+                }
+                .onOpenURL { url in
+                    if case .talk(let id) = url.detailPage {
+                        print(id.uuidString)
+                        scrollProxy.scrollTo(id)
+                        activeUUID = id
                     }
                 }
             }
-            .onOpenURL { url in
-                if case .talk(let id) = url.detailPage {
-                    print(id.uuidString)
-                    activeUUID = id
+            .toolbar {
+                ToolbarItem {
+                    Menu("Select Item") {
+                        Button("Select 5th item") {
+                            UIApplication.shared.open(URL(string: "testlink://talks/86af4777-aba8-416c-a543-e0a3cc15e708")!, options: [:], completionHandler: nil)
+                        }
+                        Button("Select 75th item") {
+                            UIApplication.shared.open(URL(string: "testlink://talks/9eb06f79-2c0b-4c83-aa9b-845807d21ebe")!, options: [:], completionHandler: nil)
+                        }
+                    }
                 }
             }
         }
