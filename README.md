@@ -17,3 +17,28 @@ Feedback to Apple describing this issue: FB8542861
 
 If you also encounter this issue please refer to this feedback.
 
+### TabView selection issue
+
+Although `TabView(selection:)` can be optional when you attach to it optional @State var it will stop changing Tabs.
+
+This works:
+
+```swift
+struct ContentView: View {
+    @State var selectedSection: SectionIdentifier = .speakers
+
+    var body: some View {
+        TabView(selection: $selectedSection) {
+            // ...
+```
+
+This will not work:
+
+```swift
+struct ContentView: View {
+    @State var selectedSection: SectionIdentifier? = .speakers
+
+    var body: some View {
+        TabView(selection: $selectedSection) {
+            // ...
+```

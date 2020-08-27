@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @Binding var selectedSection: SectionIdentifier?
+    @State var selectedSection: SectionIdentifier = .speakers
     
     var body: some View {
         TabView(selection: $selectedSection) {
@@ -19,7 +19,7 @@ struct ContentView: View {
                 }
                 .tag(SectionIdentifier.talks)
 
-            Text("speakers")
+            SpeakerView()
                 .tabItem {
                     Image(systemName: SectionIdentifier.speakers.icon)
                     Text(verbatim: SectionIdentifier.speakers.title)
@@ -27,11 +27,7 @@ struct ContentView: View {
                 .tag(SectionIdentifier.speakers)
         }
         .onOpenURL { url in
-            selectedSection = url.sectionIdentifier
-            print(selectedSection?.title)
-        }
-        .onAppear {
-            print(selectedSection?.title)
+            selectedSection = url.sectionIdentifier!
         }
     }
 }
@@ -39,34 +35,25 @@ struct ContentView: View {
 
 struct ItemListView: View {
     @StateObject var model = ItemViewModel()
-//    @Binding var selectedSection: SectionIdentifier?
 
     @State var activeUUID: UUID?
+
     var body: some View {
         NavigationView {
             ScrollViewReader { scrollProxy in
-                List {//}(selection: $activeUUID) {
-                    Button(action: {
-                        //                    selectedSection = .speakers
-                    }) {
-                        Text("speakers")
-                    }
+                List {
                     ForEach(model.items) { item in
-                        NavigationLink(destination: DetailView(item: item), tag: item.id, selection: $activeUUID) {
-                            Text("\(item.name) \(item.id)").font(.caption)
-                            
-                            //                    .id(item.id)
-                            
+                        NavigationLink(destination: DetailView(item: item),
+                                       tag: item.id,
+                                       selection: $activeUUID) {
+                            Text("\(item.name) \(item.id)")
+                                .font(.caption)
                         }
                         .id(item.id)
-                        .onAppear {
-                            //                        print(item.id.uuidString)
-                        }
                     }
                 }
                 .onOpenURL { url in
                     if case .talk(let id) = url.detailPage {
-                        print(id.uuidString)
                         scrollProxy.scrollTo(id)
                         activeUUID = id
                     }
@@ -75,6 +62,12 @@ struct ItemListView: View {
             .toolbar {
                 ToolbarItem {
                     Menu("Select Item") {
+                        Button("Select Talks tab") {
+                            UIApplication.shared.open(URL(string: "testlink://talks")!, options: [:], completionHandler: nil)
+                        }
+                        Button("Select Speakers tab") {
+                            UIApplication.shared.open(URL(string: "testlink://speakers")!, options: [:], completionHandler: nil)
+                        }
                         Button("Select 5th item") {
                             UIApplication.shared.open(URL(string: "testlink://talks/86af4777-aba8-416c-a543-e0a3cc15e708")!, options: [:], completionHandler: nil)
                         }
@@ -95,6 +88,32 @@ struct DetailView: View {
         VStack {
             Text("\(item.id)")
             Text("\(item.name)")
+        }
+    }
+}
+
+struct SpeakerView: View {
+    var body: some View {
+        NavigationView {
+            Text("speakers")
+                .toolbar {
+                    ToolbarItem {
+                        Menu("Select Item") {
+                            Button("Select Talks tab") {
+                                UIApplication.shared.open(URL(string: "testlink://talks")!, options: [:], completionHandler: nil)
+                            }
+                            Button("Select Speakers tab") {
+                                UIApplication.shared.open(URL(string: "testlink://speakers")!, options: [:], completionHandler: nil)
+                            }
+                            Button("Select 5th item") {
+                                UIApplication.shared.open(URL(string: "testlink://talks/86af4777-aba8-416c-a543-e0a3cc15e708")!, options: [:], completionHandler: nil)
+                            }
+                            Button("Select 75th item") {
+                                UIApplication.shared.open(URL(string: "testlink://talks/9eb06f79-2c0b-4c83-aa9b-845807d21ebe")!, options: [:], completionHandler: nil)
+                            }
+                        }
+                    }
+                }
         }
     }
 }
