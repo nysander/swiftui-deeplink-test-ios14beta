@@ -12,16 +12,16 @@ struct MainNavigationView: View {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     #endif
 
-    @Binding var selectedSection: SectionIdentifier?
+    @Binding var selectedSection: SectionIdentifier
 
     var body: some View {
         if horizontalSizeClass == .compact {
-            TabNavigationView(selectedTab: $selectedSection)
+            TabNavigationView(selectedSection: $selectedSection)
         } else {
             NavigationView {
                 SidebarNavigationView(selectedSection: $selectedSection)
 
-                TalkListView(searchedText: $searchText, selectedTab: $selectedSection)
+                ItemListView()
 
                 Text("Choose a talk to watch").font(.largeTitle)
             }
