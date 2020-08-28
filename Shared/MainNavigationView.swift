@@ -12,6 +12,9 @@ struct MainNavigationView: View {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     #endif
 
+    
+    @State var selectedSection: SectionIdentifier?
+
     var body: some View {
         #if os(iOS)
         if horizontalSizeClass == .compact {
@@ -20,7 +23,7 @@ struct MainNavigationView: View {
             NavigationView {
                 SidebarNavigationView()
 
-                ItemListView()
+                ItemListView(selectedSection: $selectedSection)
 
                 Text("Choose a talk to watch").font(.largeTitle)
             }

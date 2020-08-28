@@ -53,7 +53,7 @@ struct SidebarNavigationView: View {
     var list: some View {
         List {
             NavigationLink(
-                destination: ItemListView(),
+                destination: ItemListView(selectedSection: $selectedSection),
                 tag: SectionIdentifier.talks,
                 selection: $selectedSection) {
                 Label(SectionIdentifier.talks.title, systemImage: SectionIdentifier.talks.icon)

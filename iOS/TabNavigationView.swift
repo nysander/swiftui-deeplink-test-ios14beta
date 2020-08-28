@@ -9,11 +9,19 @@ import SwiftUI
 
 struct TabNavigationView: View {
     @State var selectedSection: SectionIdentifier = .talks
+
+    @State var optionalSection: SectionIdentifier? = .talks {
+        willSet {
+            if let newValue = newValue {
+                selectedSection = newValue
+            }
+        }
+    }
     
     var body: some View {
         TabView(selection: $selectedSection) {
             NavigationView {
-                ItemListView()
+                ItemListView(selectedSection: $optionalSection)
             }
             .tabItem {
                 Image(systemName: SectionIdentifier.talks.icon)

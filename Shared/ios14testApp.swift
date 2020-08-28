@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct ios14testApp: App {
+    @StateObject var model = ItemViewModel()
+
     var body: some Scene {
         WindowGroup {
             MainNavigationView()
+                .environmentObject(model)
         }
     }
 }

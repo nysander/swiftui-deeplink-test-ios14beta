@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct ItemListView: View {
-    @StateObject var model = ItemViewModel()
+    @Binding var selectedSection: SectionIdentifier?
 
+    @EnvironmentObject var model: ItemViewModel
+    
     @State var activeUUID: UUID?
 
     var body: some View {
@@ -69,14 +71,11 @@ struct ItemListView: View {
                 if case .talk(let id) = url.detailPage {
                     scrollProxy.scrollTo(id)
                     activeUUID = id
+                    selectedSection = url.sectionIdentifier
+
                 }
             }
         }
     }
 }
 
-struct ItemListView_Previews: PreviewProvider {
-    static var previews: some View {
-        ItemListView()
-    }
-}
