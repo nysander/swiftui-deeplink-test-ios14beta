@@ -22,5 +22,18 @@
 	<string>1</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>None</string>
+			<key>CFBundleURLName</key>
+			<string>testApp</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>testlink</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>
