@@ -9,12 +9,9 @@ import SwiftUI
 
 @main
 struct ios14testApp: App {
-    @State var selectedSection: SectionIdentifier = .talks
-
-    @SceneBuilder
     var body: some Scene {
         WindowGroup {
-            MainNavigationView(selectedSection: $selectedSection)
+            MainNavigationView()
         }
     }
 }

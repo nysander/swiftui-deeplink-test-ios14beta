@@ -12,14 +12,12 @@ struct MainNavigationView: View {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     #endif
 
-    @Binding var selectedSection: SectionIdentifier
-
     var body: some View {
         if horizontalSizeClass == .compact {
-            TabNavigationView(selectedSection: $selectedSection)
+            TabNavigationView()
         } else {
             NavigationView {
-                SidebarNavigationView(selectedSection: $selectedSection)
+                SidebarNavigationView()
 
                 ItemListView()
 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TabNavigationView: View {
-    @Binding var selectedSection: SectionIdentifier
+    @State var selectedSection: SectionIdentifier = .talks
     
     var body: some View {
         TabView(selection: $selectedSection) {

@@ -8,47 +8,45 @@
 import SwiftUI
 
 struct SidebarNavigationView: View {
-    @Binding var selectedSection: SectionIdentifier
+    @State var selectedSection: SectionIdentifier? = .talks
 
-    @State var selection: SectionIdentifier?
-
-    func switchSelection(_ selection: SectionIdentifier?) {
-        if let selection = selection {
-            selectedSection = selection
-        }
-    }
-
-    @ViewBuilder
     var body: some View {
-        List(selection: $selection.onChange(switchSelection)) {
+        List {
             NavigationLink(
                 destination: ItemListView(),
                 tag: SectionIdentifier.talks,
-                selection: $selection) {
+                selection: $selectedSection) {
                 Label(SectionIdentifier.talks.title, systemImage: SectionIdentifier.talks.icon)
             }
 
             NavigationLink(
                 destination: SpeakerView(),
                 tag: SectionIdentifier.speakers,
-                selection: $selection) {
+                selection: $selectedSection) {
                 Label(SectionIdentifier.speakers.title, systemImage: SectionIdentifier.speakers.icon)
             }
         }
         .listStyle(SidebarListStyle())
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: {
-                    //
-                }) {
-                    Image(systemName: "gear")
-                        .keyboardShortcut("s", modifiers: .command)
+            ToolbarItem {
+                Menu("Select Item") {
+                    Button("Select Talks tab") {
+                        UIApplication.shared.open(URL(string: "testlink://talks")!, options: [:], completionHandler: nil)
+                    }
+                    Button("Select Speakers tab") {
+                        UIApplication.shared.open(URL(string: "testlink://speakers")!, options: [:], completionHandler: nil)
+                    }
+                    Button("Select 5th item") {
+                        UIApplication.shared.open(URL(string: "testlink://talks/86af4777-aba8-416c-a543-e0a3cc15e708")!, options: [:], completionHandler: nil)
+                    }
+                    Button("Select 75th item") {
+                        UIApplication.shared.open(URL(string: "testlink://talks/9eb06f79-2c0b-4c83-aa9b-845807d21ebe")!, options: [:], completionHandler: nil)
+                    }
                 }
             }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Image(systemName: "person")
-                    .keyboardShortcut("p", modifiers: .command)
-            }
+        }
+        .onOpenURL { url in
+            selectedSection = url.sectionIdentifier
         }
     }
 }
