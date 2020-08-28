@@ -32,7 +32,7 @@ struct MainNavigationView: View {
         NavigationView {
             SidebarNavigationView()
 
-            ItemListView()
+            ItemListView(selectedSection: $selectedSection)
 
             Text("Choose a talk to watch").font(.largeTitle)
         }
