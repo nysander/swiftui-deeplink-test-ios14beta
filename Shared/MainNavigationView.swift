@@ -13,6 +13,7 @@ struct MainNavigationView: View {
     #endif
 
     var body: some View {
+        #if os(iOS)
         if horizontalSizeClass == .compact {
             TabNavigationView()
         } else {
@@ -24,5 +25,14 @@ struct MainNavigationView: View {
                 Text("Choose a talk to watch").font(.largeTitle)
             }
         }
+        #elseif os(macOS)
+        NavigationView {
+            SidebarNavigationView()
+
+            ItemListView()
+
+            Text("Choose a talk to watch").font(.largeTitle)
+        }
+        #endif
     }
 }
