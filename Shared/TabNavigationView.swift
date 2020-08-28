@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  TabNavigationView.swift
 //  Shared
 //
 //  Created by Pawel Madej on 20/08/2020.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct TabNavigationView: View {
     @State var selectedSection: SectionIdentifier = .speakers
     
     var body: some View {
